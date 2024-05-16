@@ -10,12 +10,12 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 all:$(NAME)
-	#@echo "make    ✅"
+	@echo "make    ✅"
 
-$(NAME): $(OBJ_FILES) $(LIBTF) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LIBTF) $(PRINTF)
+$(NAME): $(OBJ_FILES) $(PRINTF) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ_FILES) $(PRINTF) $(LIBFT) -o $(NAME)
 
-$(LIBTF):
+$(LIBFT):
 	make -C Libft
 
 $(PRINTF):
@@ -28,14 +28,16 @@ clean:
 	make clean -C Libft
 	make clean -C Libft/Printf
 	rm -f $(OBJ_FILES)
-	#@echo "clean   🌪️"
+	@echo "clean   🌪️"
 
 fclean: clean
 	make fclean -C Libft
 	make fclean -C Libft/Printf
 	rm -f $(NAME)
-	#@echo "fclean   🔥"
+	@echo "fclean  🔥"
 
 re: fclean all
+
+.SILENT:
 
 .PHONY: all name clean fclean re

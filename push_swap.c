@@ -6,36 +6,41 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/05/13 14:21:54 by porellan         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:57:01 by porellan         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include <stdio.h>
+#include "push_swap.h"
 
 int main(int argc, char *argv[])
 {
-    //int i;
-    //int j;
+    int i;
+    int j;
+    char    **result;
     
-    //i = 0;
-    //j = 0;
+    j = 1;
     if (argc < 2)
-        printf("Error\n");
-    //while ()
-    // if ((*argv[i] < 48 && *argv[i] > 57) || (*argv[i] != 43 && *argv[i] != 45))
-    //     write(2, "Error\n", 6);
-    // if (*argv[i] == 43 || *argv[i] == 45)
-    
-    
-    
-    
-    
-    
-    
-    
-    printf("%d\n", *argv[2]);
-    printf("%s\n", argv[2]);
-    printf("%d\n", argv[1][2]);
-
-    return 0;
+        write(2, "Error\n", 6);
+    while (j < argc)
+    {
+        i = 0;
+        while (argv[j][i])
+        {
+            if ((argv[j][i] < 48 || argv[j][i] > 57) && 
+                (argv[j][i] != 43 && argv[j][i] != 45 && argv[j][i] != 34 && 
+                argv[j][i] != 32))
+                write(2, "Error\n", 6);
+            if ((argv[j][i] == 43 || argv[j][i] == 45) && 
+                (argv[j][i+1] < 48 || argv[j][i+1] > 57))
+                write(2, "Error\n", 6);
+            i++;
+        }
+        result = ft_split(argv[j], 32);
+        while (*result)
+        {
+            ft_printf("%s\n", *result); //incluir en stack
+            result++;
+        }
+        j++;
+    }
 }

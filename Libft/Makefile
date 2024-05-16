@@ -70,4 +70,6 @@ re: fclean all
 bonus: $(BONUS_OBJ_FILES)
 			$(AR) $(ARFLAGS) $(NAME) $(BONUS_OBJ_FILES)
 
+.SILENT:
+
 .PHONY: all name clean fclean re bonus

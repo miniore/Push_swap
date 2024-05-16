@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:43:57 by porellan          #+#    #+#             */
-/*   Updated: 2024/05/13 13:58:39 by porellan         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:01:56 by porellan         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -86,12 +86,3 @@ char	**ft_split(char const *s, char c)
 	array = array_maker(s, array, strings, c);
 	return (array);
 }
-
-// int	main(void)
-// {
-// 	char *s = "Hola como estas tronco";
-
-// 	char **result = ft_split(s, 32);
-// 	printf("%s", result[2]);
-// 	return 0;
-// }

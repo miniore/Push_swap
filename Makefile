@@ -3,7 +3,9 @@ NAME = push_swap
 LIBFT = Libft/libft.a
 PRINTF = Libft/Printf/libftprintf.a
 
-SRC_FILES = push_swap.c
+SRC_FILES = main.c \
+			parse.c \
+			atol.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = gcc

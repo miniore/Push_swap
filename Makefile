@@ -5,7 +5,10 @@ PRINTF = Libft/Printf/libftprintf.a
 
 SRC_FILES = main.c \
 			parse.c \
-			atol.c
+			atol.c \
+			swap.c \
+			push.c \
+			rotate.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = gcc

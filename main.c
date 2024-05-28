@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miniore <miniore@student.42.fr>            +#+  +:+       +#+        */
+/*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/05/24 17:57:32 by miniore          ###   ########.fr       */
+/*   Updated: 2024/05/28 14:00:30 by porellan         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "push_swap.h"
 
@@ -18,6 +18,7 @@ int main(int argc, char *argv[]){
     char    **result;
     long    *number;
     struct s_list *a = NULL;
+    //struct s_list *b = NULL;
 
     result = NULL;
     j = 1;
@@ -45,6 +46,9 @@ int main(int argc, char *argv[]){
         j++;
     }
     printList(a);
+    ra_rotate_a(&a);
+    printList(a);
+    //printList(b);
     // same_number(argv[j][i], )
 }
 

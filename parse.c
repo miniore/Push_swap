@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miniore <miniore@student.42.fr>            +#+  +:+       +#+        */
+/*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:57:32 by miniore           #+#    #+#             */
-/*   Updated: 2024/05/24 16:54:10 by miniore          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:07:36 by porellan         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "push_swap.h"
 
@@ -35,40 +35,20 @@ void symbols_parse(int s, int p, int n)
     }
 }
 
-// void same_number()
-// {
-    
-// }
+void same_number_parse(t_list *lst)
+{
+    t_list  *numb;
+    t_list  *current;
 
-
-// void printList(Node* head) {
-//     Node* current = head;
-//     while (current != NULL) {
-//         printf("%d -> ", (long int*)current->data);
-//         current = current->next;
-//     }
-//     printf("NULL\n");
-// }
-
-// // Función para liberar la memoria de la lista
-// void freeList(Node* head) {
-//     Node* current = head;
-//     Node* nextNode;
-//     while (current != NULL) {
-//         nextNode = current->next;
-//         free(current);
-//         current = nextNode;
-//     }
-// }
-
-// t_list	*ft_lstnew(void *content)
-// {
-// 	t_list	*new;
-
-// 	new = (t_list*)malloc(sizeof(t_list));
-// 	if (!new)
-// 		return (0);
-// 	new -> content = content;
-// 	new -> next = NULL;
-// 	return (new);
-// }
+    numb = lst;
+    current = lst->next;
+    while (current != NULL)
+    {
+        if (current->content == numb->content)
+        {
+            write(2, "Error\n", 6);
+            exit(0);
+        }
+        current = current->next;
+    }
+}

@@ -8,7 +8,8 @@ SRC_FILES = main.c \
 			atol.c \
 			swap.c \
 			push.c \
-			rotate.c
+			rotate.c \
+			reverse_rotate.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = gcc

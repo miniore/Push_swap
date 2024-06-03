@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/05/28 14:00:30 by porellan         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:21:09 by porellan         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
     char    **result;
     long    *number;
     struct s_list *a = NULL;
-    //struct s_list *b = NULL;
+    //struct s_list *b = ft_lstnew((long *)17);
 
     result = NULL;
     j = 1;
@@ -29,28 +29,48 @@ int main(int argc, char *argv[]){
             symbols_parse(argv[j][i], argv[j][i-1], argv[j][i+1]);
             i++;
         }
-        //if (argv[j][0] == 34)
         result = ft_split(argv[j], 32);
         while (*result){
-            //ft_printf("%s\n", *result);
             number = (long *)malloc(sizeof(long));
             if (!number)
                 return (0);
             number = (long *)ft_atol(*result);
             ft_lstnew(number);
-            ft_lstadd_front(&a, number);       // Llamada a funcion para añadir a lista
-            //ft_printf("%d\n", number);
+            ft_lstadd_front(&a, number);
+            same_number_parse(a);
             result++;
             //free(number);
         }
         j++;
     }
     printList(a);
-    ra_rotate_a(&a);
-    printList(a);
-    //printList(b);
-    // same_number(argv[j][i], )
 }
+
+
+long    **create_array(t_list *lst)
+{
+    t_list  *current;
+    static long    array[10];
+    int i;
+    //int j;
+    
+    //j = 0;
+    current = lst;
+    current->content = array[0];
+    while (current != NULL)
+    {
+        i = 0;
+        while (current->content > array[i])
+            i++;
+        if (current->content < array[i])
+        {
+            array[i+1] = array[i];
+            array[i] = current->content;  
+        }
+        current = current->next;
+    }
+}
+
 
 void printList(t_list* head) {
     t_list *current = head;

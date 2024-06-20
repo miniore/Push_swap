@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:06:21 by porellan          #+#    #+#             */
-/*   Updated: 2024/05/28 13:46:38 by porellan         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:18:37 by porellan         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,8 +21,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 	else
 	{
-		while (!actual->next)
-			actual = actual -> next;
+		while (actual->next != NULL)
+			actual = actual->next;
 		actual->next = new;
 	}
 }

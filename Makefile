@@ -4,16 +4,17 @@ LIBFT = Libft/libft.a
 PRINTF = Libft/Printf/libftprintf.a
 
 SRC_FILES = main.c \
+			push_swap_utils.c \
 			parse.c \
-			atol.c \
 			swap.c \
 			push.c \
 			rotate.c \
-			reverse_rotate.c
+			reverse_rotate.c \
+			sort_3_numbers.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 
 all:$(NAME)
 	@echo "make    ✅"

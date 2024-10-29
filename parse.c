@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
@@ -6,49 +6,92 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:57:32 by miniore           #+#    #+#             */
-/*   Updated: 2024/06/03 12:07:36 by porellan         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:38:40 by porellan         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    arg_parse(int a)
+void    parse(char **argv, int argc)
 {
-    if (a < 2)
+    arg_parse(argc);
+    symbols_parse(argv, argc);
+    num_limits_parse(argv, argc);
+}
+
+
+void    arg_parse(int argc)
+{
+    if (argc < 2)
     {
-        write(2, "Error\n", 6);
+        write(2, "Error arg\n", 10);
         exit(0);
     }
 }
 
-void symbols_parse(int s, int p, int n)
+void symbols_parse(char **argv, int argc)
 {
-    if ((s < 48 || s > 57) && (s != 43 && s != 45) && (s != 34 && s != 32))
+    int i;
+    int j;
+    
+    j = 1;
+    while(j < argc)
     {
-        write(2, "Error\n", 6);
-        exit(0);
-    }
-    if ((s == 43 || s == 45) && ((n < 48 || n > 57) || (p > 48 && p < 57)))
-    {
-        write(2, "Error\n", 6);
-        exit(0);
+        i = 0;
+        while(argv[j][i])
+        {
+            if (!ft_isdigit(argv[j][i]) && (argv[j][i] != 43 && argv[j][i] != 45)
+            && (argv[j][i] != 34 && argv[j][i] != 32))
+            {
+                write(2, "Error 1\n", 8);
+                exit(0);
+            }
+            if ((argv[j][i] == 43 || argv[j][i] == 45) &&
+            (argv[j][i+1] < 48 || argv[j][i+1] > 57))
+            {
+                write(2, "Error 2\n", 8);
+                exit(0);
+            }
+            i++;
+        }
+        j++;
     }
 }
 
-void same_number_parse(t_list *lst)
+void    num_limits_parse(char **argv, int argc)
+{
+    int i;
+    
+    i = 1;
+    while(i < argc)
+    {
+        if (ft_atol(argv[i]) < -2147483648 || ft_atol(argv[i]) > 2147483647)
+        {
+            write(2, "Error 3\n", 8);
+            exit(0);
+        }
+        i++;
+    }
+}
+
+void same_number_parse(t_list **lst)
 {
     t_list  *numb;
     t_list  *current;
 
-    numb = lst;
-    current = lst->next;
-    while (current != NULL)
+    numb = *lst;
+    while (numb != NULL)
     {
-        if (current->content == numb->content)
+        current = numb->next;
+        while (current != NULL)
         {
-            write(2, "Error\n", 6);
-            exit(0);
+            if (current->content == numb->content)
+            {
+                write(2, "Error  4\n", 9);
+                exit(0);
+            }
+            current = current->next;
         }
-        current = current->next;
+        numb = numb->next;
     }
 }

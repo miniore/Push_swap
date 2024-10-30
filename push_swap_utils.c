@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:09:59 by porellan          #+#    #+#             */
-/*   Updated: 2024/10/29 19:07:31 by porellan         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:22:05 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,6 @@
 // }
 
 
-void	ft_ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*actual;
-
-	if (!*lst)
-		*lst = new;
-	else
-	{
-	    actual = *lst;
-		while (actual->next != NULL)
-			actual = actual->next;
-		actual->next = new;
-	}
-}
-
-
 t_list  *lst_maker(char **argv, int argc)
 {
     int     *number;
@@ -91,12 +75,7 @@ t_list  *lst_maker(char **argv, int argc)
             if (!number)
                 return (0);
             *number = ft_atoi(result[i]);
-            // ft_printf("ey\n");
-            //ft_lstnew(number);
-            ft_printf("num:%i\n", *number);
-            ft_ft_lstadd_back(&lst, ft_lstnew(number));
-            // result++;
-            //free(number);
+            ft_lstadd_back(&lst, ft_lstnew(number));
             i++;
         }
         j++;
@@ -113,14 +92,13 @@ int   *create_array(t_list **lst)
 
     current = *lst;
     array_size = ft_lstsize(*lst);
-    //ft_printf("%i\n", array_size);
     array = (int *)malloc(array_size * sizeof(int));
+    if (!array)
+        return (0);
     i = 0;
-    //ft_printf("ey\n");
     while (array_size--)
     {
         array[i] = *(int *)current->content;
-        //ft_printf("ey\n");
         current = current->next;
         i++;
     }

@@ -5,12 +5,13 @@ PRINTF = Libft/Printf/libftprintf.a
 
 SRC_FILES = main.c \
 			push_swap_utils.c \
+			stack_utils.c \
 			parse.c \
+			sort_small.c \
 			swap.c \
 			push.c \
 			rotate.c \
-			reverse_rotate.c \
-			sort_3_numbers.c
+			reverse_rotate.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = gcc

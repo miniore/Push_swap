@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/10/30 20:00:04 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/06 16:54:56 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,53 +22,81 @@
 //     }
 // }
 
-
-void    lst_sort(t_list **a, t_list **b, int *array, int i)
+void     set_num_at_top(t_list **a, int chunk_size, int travelled_chunk_size, int counter)
 {
-    t_list  *actual;
-    int     j;
-
-    if (ft_lstsize(*a) == 3 || stack_ordered(a) == 0)
-        return ;
-    actual = *a;
-    j = 0;
-    while (array[i] != *(int *)actual->content)
+    if (counter < (travelled_chunk_size - (chunk_size/2)) && counter) //Si está en una posición por encima de la mitad (menos de la mitad)
     {
-        j++;
-        actual = actual->next;
-    }
-    if (j < ft_lstsize(*a)/2) //Si está en una posición por encima de la mitad
-    {
-        while (j--)
-            rra_reverse_rotate_a(a);
-        pb_push_b(b, a);
-    }
-    else
-    {
-        while (j--)
+        while (counter--)
             ra_rotate_a(a);
-        pb_push_b(b, a);
     }
-    lst_sort(a, b, array, i++);
+    else // si j  es mayor que la mitad
+    {
+        while (counter < chunk_size--)
+            rra_reverse_rotate_a(a);
+    }
 }
 
-void    sort_small(t_list **a, t_list **b, int *array)
+void    search_num(int *array, int chunk_size, int travelled_chunk_size)
 {
-    if (stack_ordered(a) == 0)
-        return ;
-    if (ft_lstsize(*a) <= 2)
+    int     max_num_on_chunk;
+    int     i;
+    
+    max_num_on_chunk = array[travelled_chunk_size];
+    while (i <= chunk_size)
     {
-        if (ft_lstsize(*a) == 1)
-            return ;
-        sa_swap_a(a);
-        return ;
+        if (max_num_on_chunk < array[i])
+            max_num_on_chunk = array[i];
+        i++;
     }
-    lst_sort(a, b, array, 0);
-    if (ft_lstsize(*a) == 3)
+}
+
+int     search_num_on_chunk(t_list **a, t_list **b, int *array, int chunk_size)
+{
+    t_list  *temp;
+    int     i;
+    int     counter;
+
+    temp = *a;
+    while (temp->content != NULL)
     {
-        sort_3_num(a, array);
-        return ;
+        counter = 0;
+        i = 0;
+        while (counter <= chunk_size)
+        {
+            if (array[i] == *(int *)temp->content)    //Cuando un numero sea menor o igual que el maximo de ese chunk
+            {
+                set_num_at_top(a, chunk_size, counter, );       // Check position
+                pb_push_b(b, a);
+                // Funcion de ordenar en b
+                counter++;
+            }
+            i++;
+        }
     }
+    return (0);
+}
+
+void    sort_big(t_list **a, t_list **b, int *array, int array_size)
+{
+    t_list          *temp;
+    int             chunk_size;
+    static int      travelled_chunk_size;
+    int             counter;
+
+    chunk_size = array_size/5;
+    travelled_chunk_size = 0;
+    counter = 0;
+    temp = *a;
+    while (search_num_on_chunk(a, b, array, chunk_size) == 1)
+    {
+        counter++;
+        temp = temp->next;
+    }
+    while ()
+    {
+        //Funcion de pasar numeros a stack a ordenados
+    }
+    travelled_chunk_size = travelled_chunk_size + chunk_size;
 }
 
 void    sort(t_list **a, t_list **b, int argc)
@@ -80,8 +108,10 @@ void    sort(t_list **a, t_list **b, int argc)
     array_size = ft_lstsize(*a);
     sorted_array(array, 0, array_size - 1);
     print_array(array, array_size);
-    if (argc < 101)
+    if (argc < 100)
         sort_small(a, b, array);
+    // else if (argc >= 100)
+    //     sort_big(a, b, array, array_size);
     free(array);
 }
 
@@ -91,14 +121,13 @@ int main(int argc, char **argv)
     t_list *b = NULL;
 
     parse(argv, argc);
-    //a = stack_maker(argv);
-    a = lst_maker(argv, argc);
+    a = lst_maker(argv, argc);     //Liberar las dos variables de esta funcion
     same_number_parse(&a);
-    printList(a);
-    //sort_3_num(&a, array);
+    printList(a, b);
     sort(&a, &b, argc);
-    printList(a);
-    printList(b);
-
+    printList(a, b);
     return (0);
 }
+
+
+// 1 2 3 4 5 6 7 8 9

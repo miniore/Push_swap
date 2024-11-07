@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/06 16:54:56 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:52:57 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,81 +22,160 @@
 //     }
 // }
 
-void     set_num_at_top(t_list **a, int chunk_size, int travelled_chunk_size, int counter)
+
+// int    search_num(int *array, int chunk_size, int travelled_chunk_size)
+// {
+//     int     max_num_on_chunk;
+//     int     i;
+    
+//     max_num_on_chunk = array[travelled_chunk_size];
+//     while (i <= chunk_size)
+//     {
+//         if (max_num_on_chunk < array[i])
+//             max_num_on_chunk = array[i];
+//         i++;
+//     }
+//     return (max_num_on_chunk);
+// }
+
+// int     search_num_on_chunk(t_list **a, t_list **b, int *array, int chunk_size)
+// {
+//     t_list  *temp;
+//     int     i;
+//     int     counter;
+
+//     temp = *a;
+//     while (temp->content != NULL)
+//     {
+//         counter = 0;
+//         i = 0;
+//         while (counter <= chunk_size)
+//         {
+//             if (array[i] == *(int *)temp->content)    //Cuando un numero sea menor o igual que el maximo de ese chunk
+//             {
+//                 set_num_at_top(a, chunk_size, counter, );       // Check position
+//                 pb_push_b(b, a);
+//                 // Funcion de ordenar en b
+//                 counter++;
+//             }
+//             i++;
+//         }
+//     }
+//     return (0);
+// }
+
+// void    sort_big(t_list **a, t_list **b, int *array, int array_size)
+// {
+//     t_list          *temp;
+//     int             chunk_size;
+//     static int      travelled_chunk_size;
+//     int             counter;
+
+//     chunk_size = array_size/5;
+//     travelled_chunk_size = 0;
+//     counter = 0;
+//     temp = *a;
+//     while (search_num_on_chunk(a, b, array, chunk_size) == 1)
+//     {
+//         counter++;
+//         temp = temp->next;
+//     }
+//     while ()
+//     {
+//         //Funcion de pasar numeros a stack a ordenados
+//     }
+//     travelled_chunk_size = travelled_chunk_size + chunk_size;
+// }
+
+// Buscar el numero maximo de cada chunk
+// encontrar un numero que pertennezca a ese chunk (menor que el mayor)
+// Pasar ese numero a b
+// Repetir los ultimos dos pasos hasta pasar todos los numeros del chunk  (comprobar si has pasado un total de numeros igua que el chunk size)
+
+void    back_to_stack_a(t_list **a, t_list **b, int *array, int array_size)
 {
-    if (counter < (travelled_chunk_size - (chunk_size/2)) && counter) //Si está en una posición por encima de la mitad (menos de la mitad)
+    t_list  *temp;
+
+    temp = *b;
+    while (ft_lstsize(*b) != 0) //Arreglar funcion!!!!
     {
-        while (counter--)
+        if (*(int *)temp->content == array[array_size])
+        {
+            pa_push_a(a, b);    
+            array_size--;
+        }
+        if (*(int *)temp->content < *(int *)temp->next->content)
+            sb_swap_b(b);
+        rrb_reverse_rotate_b(b);
+    }
+    printList(*a, *b);
+}
+
+int search_position(t_list **a, int *array, int chunk_size)
+{
+    t_list  *temp;
+    int     position;
+    
+    temp = *a;
+    position = 0;
+    ft_printf("Buscar numero menor que: %i\n", array[chunk_size]);
+    while (*(int *)temp->content > array[chunk_size])
+    {
+        position++;
+        temp = temp->next;
+    }
+    return(position);
+}
+
+void     set_to_push(t_list **a, t_list **b, int position, int lst_size, int med)
+{
+    t_list  *temp;
+    
+    if (position < lst_size/2) //Si está en una posición por encima de la mitad (menos de la mitad)
+    {
+        while (position--)
             ra_rotate_a(a);
     }
     else // si j  es mayor que la mitad
     {
-        while (counter < chunk_size--)
+        while (ft_lstsize(*a) > 1 && position < lst_size--)
             rra_reverse_rotate_a(a);
     }
-}
-
-void    search_num(int *array, int chunk_size, int travelled_chunk_size)
-{
-    int     max_num_on_chunk;
-    int     i;
-    
-    max_num_on_chunk = array[travelled_chunk_size];
-    while (i <= chunk_size)
-    {
-        if (max_num_on_chunk < array[i])
-            max_num_on_chunk = array[i];
-        i++;
-    }
-}
-
-int     search_num_on_chunk(t_list **a, t_list **b, int *array, int chunk_size)
-{
-    t_list  *temp;
-    int     i;
-    int     counter;
-
-    temp = *a;
-    while (temp->content != NULL)
-    {
-        counter = 0;
-        i = 0;
-        while (counter <= chunk_size)
-        {
-            if (array[i] == *(int *)temp->content)    //Cuando un numero sea menor o igual que el maximo de ese chunk
-            {
-                set_num_at_top(a, chunk_size, counter, );       // Check position
-                pb_push_b(b, a);
-                // Funcion de ordenar en b
-                counter++;
-            }
-            i++;
-        }
-    }
-    return (0);
+    pb_push_b(b, a); //Despues de hacer pb si el numero es menor que la media lo bajas abajo
+    temp = *b;
+    if (ft_lstsize(*b) > 1 && *(int *)temp->content <= med)
+        rb_rotate_b(b);
+    printList(*a, *b);
 }
 
 void    sort_big(t_list **a, t_list **b, int *array, int array_size)
 {
-    t_list          *temp;
-    int             chunk_size;
-    static int      travelled_chunk_size;
-    int             counter;
+    int chunk_size;
+    int max_chunk_size;
+    int position;
+    int med;
+    int i;
 
     chunk_size = array_size/5;
-    travelled_chunk_size = 0;
-    counter = 0;
-    temp = *a;
-    while (search_num_on_chunk(a, b, array, chunk_size) == 1)
+    max_chunk_size = chunk_size;
+    ft_printf("Size del array: %i\n", array_size);
+    while (ft_lstsize(*a) > 0 && a)
     {
-        counter++;
-        temp = temp->next;
+        i = array_size/5;
+        ft_printf("Size del chunk: %i\n", chunk_size);
+        med = array[max_chunk_size - (chunk_size / 2) - 1]; // Por que no sale la media?
+        ft_printf("Valor de la media: %i\n", med);
+        while (i--)
+        {
+            position = search_position(a, array, max_chunk_size - 1);
+            ft_printf("Posicion del numero: %i\n", position);
+            set_to_push(a, b, position, ft_lstsize(*a), med);
+        }
+        //ft_printf("Valor de i: %i\n", i);
+        max_chunk_size = max_chunk_size + chunk_size;
+        ft_printf("Size del chunk max: %i\n", max_chunk_size);
     }
-    while ()
-    {
-        //Funcion de pasar numeros a stack a ordenados
-    }
-    travelled_chunk_size = travelled_chunk_size + chunk_size;
+    back_to_stack_a(a, b, array, array_size);
 }
 
 void    sort(t_list **a, t_list **b, int argc)
@@ -107,11 +186,10 @@ void    sort(t_list **a, t_list **b, int argc)
     array = create_array(a);
     array_size = ft_lstsize(*a);
     sorted_array(array, 0, array_size - 1);
-    print_array(array, array_size);
-    if (argc < 100)
+    if (argc < 10)
         sort_small(a, b, array);
-    // else if (argc >= 100)
-    //     sort_big(a, b, array, array_size);
+    else if (argc < 101)
+        sort_big(a, b, array, array_size);
     free(array);
 }
 
@@ -123,9 +201,7 @@ int main(int argc, char **argv)
     parse(argv, argc);
     a = lst_maker(argv, argc);     //Liberar las dos variables de esta funcion
     same_number_parse(&a);
-    printList(a, b);
     sort(&a, &b, argc);
-    printList(a, b);
     return (0);
 }
 

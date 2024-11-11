@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/11 17:20:41 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/11 20:02:22 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,12 @@ int search_position(t_list **a, int *array, int chunk_size)
     return(position);
 }
 
-void     set_to_push(t_list **a, t_list **b, int position, int lst_size, int med)
+void     set_to_push(t_list **a, t_list **b, int position, int med)
 {
     t_list  *temp;
+    int lst_size;
     
+    lst_size = ft_lstsize(*a);
     if (position < lst_size/2) //Si está en una posición por encima de la mitad (menos de la mitad)
     {
         while (position--)
@@ -160,7 +162,7 @@ void     set_to_push(t_list **a, t_list **b, int position, int lst_size, int med
     }
     else // si j  es mayor que la mitad
     {
-        while (ft_lstsize(*a) > 1 && position < lst_size--)
+        while (lst_size > 1 && position < lst_size--)
             rra_reverse_rotate_a(a);
     }
     pb_push_b(b, a); //Despues de hacer pb si el numero es menor que la media lo bajas abajo
@@ -179,23 +181,25 @@ void    sort_big(t_list **a, t_list **b, int *array, int array_size)
     int i;
 
     chunk_size = array_size/5;
-    max_chunk_size = chunk_size;
+    max_chunk_size = chunk_size - 1;
     //ft_printf("Size del array: %i\n", array_size);
     while (ft_lstsize(*a) > 0 && a)
     {
         i = array_size/5;
-        //ft_printf("Size del chunk: %i\n", chunk_size);
-        med = array[max_chunk_size - (chunk_size / 2) - 1]; // Por que no sale la media?
-        //ft_printf("Valor de la media: %i\n", med);
-        while (i--)
+        ft_printf("Size del chunk: %i\n", chunk_size);
+        med = array[max_chunk_size - (chunk_size / 2)]; // Por que no sale la media?
+        ft_printf("Valor de la media: %i\n", med);
+        while (ft_lstsize(*a) > 0 && i--)
         {
-            position = search_position(a, array, max_chunk_size - 1);
+            position = search_position(a, array, max_chunk_size - 1); //Mover a set to push
             //ft_printf("Posicion del numero: %i\n", position);
-            set_to_push(a, b, position, ft_lstsize(*a), med);
+            set_to_push(a, b, position, med);
         }
+        if (ft_lstsize(*a) < chunk_size)
+            chunk_size = ft_lstsize(*a);
         //ft_printf("Valor de i: %i\n", i);
         max_chunk_size = max_chunk_size + chunk_size;
-        //ft_printf("Size del chunk max: %i\n", max_chunk_size);
+        //ft_printf("Size del chunk  - 1max: %i\n", max_chunk_size);
     }
     back_to_stack_a(a, b, array, array_size - 1);
 }
@@ -208,24 +212,21 @@ void    sort(t_list **a, t_list **b, int argc)
     array = create_array(a);
     array_size = ft_lstsize(*a);
     sorted_array(array, 0, array_size - 1);
-    if (argc < 10)
+    if (argc < 20)
         sort_small(a, b, array);
-    else if (argc > 9)
+    else if (argc >= 20)
         sort_big(a, b, array, array_size);
     free(array);
 }
-
+ - 1
 int main(int argc, char **argv)
 {
     t_list *a;
     t_list *b = NULL;
 
     parse(argv, argc);
-    a = lst_maker(argv, argc);     //Liberar las dos variables de esta funcion
+    a = lst_maker(argv, argc);     // - 1Liberar las dos variables de esta funcion
     same_number_parse(&a);
     sort(&a, &b, argc);
     return (0);
 }
-
-
-// 1 2 3 4 5 6 7 8 9

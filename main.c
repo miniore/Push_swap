@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/07 21:52:57 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:20:41 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,42 @@
 void    back_to_stack_a(t_list **a, t_list **b, int *array, int array_size)
 {
     t_list  *temp;
+    int     position;
+    int     lst_size;
 
     temp = *b;
-    while (ft_lstsize(*b) != 0) //Arreglar funcion!!!!
+    lst_size = ft_lstsize(*b);
+    position = 0;
+    if (lst_size == 0)
+        return ;
+    while (temp && array[array_size] != *(int *)temp->content)
     {
-        if (*(int *)temp->content == array[array_size])
-        {
-            pa_push_a(a, b);    
-            array_size--;
-        }
-        if (*(int *)temp->content < *(int *)temp->next->content)
-            sb_swap_b(b);
-        rrb_reverse_rotate_b(b);
+        position++;
+        temp = temp->next;
     }
-    printList(*a, *b);
+    //ft_printf("Position b: %i\n", position);
+    if (position < lst_size/2) //Si está en una posición por encima de la mitad (menos de la mitad)
+    {
+        while (position--)
+            rb_rotate_b(b);
+    }
+    else // si j  es mayor que la mitad
+    {
+        while (position < lst_size--)
+            rrb_reverse_rotate_b(b);
+    }
+        
+        // if (*(int *)temp->content == array[array_size])
+        // {
+        //     pa_push_a(a, b);  
+        //     array_size--;
+        // }
+        // if (*(int *)temp->content < *(int *)temp->next->content)
+        //     sb_swap_b(b);
+        // rrb_reverse_rotate_b(b);
+    pa_push_a(a, b);
+    //printList(*a, *b);
+    back_to_stack_a(a, b, array, --array_size);
 }
 
 int search_position(t_list **a, int *array, int chunk_size)
@@ -118,7 +140,7 @@ int search_position(t_list **a, int *array, int chunk_size)
     
     temp = *a;
     position = 0;
-    ft_printf("Buscar numero menor que: %i\n", array[chunk_size]);
+    //ft_printf("Buscar numero menor que: %i\n", array[chunk_size]);
     while (*(int *)temp->content > array[chunk_size])
     {
         position++;
@@ -145,7 +167,7 @@ void     set_to_push(t_list **a, t_list **b, int position, int lst_size, int med
     temp = *b;
     if (ft_lstsize(*b) > 1 && *(int *)temp->content <= med)
         rb_rotate_b(b);
-    printList(*a, *b);
+    //printList(*a, *b);
 }
 
 void    sort_big(t_list **a, t_list **b, int *array, int array_size)
@@ -158,24 +180,24 @@ void    sort_big(t_list **a, t_list **b, int *array, int array_size)
 
     chunk_size = array_size/5;
     max_chunk_size = chunk_size;
-    ft_printf("Size del array: %i\n", array_size);
+    //ft_printf("Size del array: %i\n", array_size);
     while (ft_lstsize(*a) > 0 && a)
     {
         i = array_size/5;
-        ft_printf("Size del chunk: %i\n", chunk_size);
+        //ft_printf("Size del chunk: %i\n", chunk_size);
         med = array[max_chunk_size - (chunk_size / 2) - 1]; // Por que no sale la media?
-        ft_printf("Valor de la media: %i\n", med);
+        //ft_printf("Valor de la media: %i\n", med);
         while (i--)
         {
             position = search_position(a, array, max_chunk_size - 1);
-            ft_printf("Posicion del numero: %i\n", position);
+            //ft_printf("Posicion del numero: %i\n", position);
             set_to_push(a, b, position, ft_lstsize(*a), med);
         }
         //ft_printf("Valor de i: %i\n", i);
         max_chunk_size = max_chunk_size + chunk_size;
-        ft_printf("Size del chunk max: %i\n", max_chunk_size);
+        //ft_printf("Size del chunk max: %i\n", max_chunk_size);
     }
-    back_to_stack_a(a, b, array, array_size);
+    back_to_stack_a(a, b, array, array_size - 1);
 }
 
 void    sort(t_list **a, t_list **b, int argc)
@@ -188,7 +210,7 @@ void    sort(t_list **a, t_list **b, int argc)
     sorted_array(array, 0, array_size - 1);
     if (argc < 10)
         sort_small(a, b, array);
-    else if (argc < 101)
+    else if (argc > 9)
         sort_big(a, b, array, array_size);
     free(array);
 }

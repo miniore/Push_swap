@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/11 20:02:22 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:23:18 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void    back_to_stack_a(t_list **a, t_list **b, int *array, int array_size)
         // rrb_reverse_rotate_b(b);
     pa_push_a(a, b);
     //printList(*a, *b);
-    back_to_stack_a(a, b, array, --array_size);
+    back_to_stack_a(a, b, array, array_size - 1);
 }
 
 int search_position(t_list **a, int *array, int chunk_size)
@@ -186,18 +186,18 @@ void    sort_big(t_list **a, t_list **b, int *array, int array_size)
     while (ft_lstsize(*a) > 0 && a)
     {
         i = array_size/5;
-        ft_printf("Size del chunk: %i\n", chunk_size);
+        //ft_printf("Size del chunk: %i\n", chunk_size);
         med = array[max_chunk_size - (chunk_size / 2)]; // Por que no sale la media?
-        ft_printf("Valor de la media: %i\n", med);
+        //ft_printf("Valor de la media: %i\n", med);
         while (ft_lstsize(*a) > 0 && i--)
         {
-            position = search_position(a, array, max_chunk_size - 1); //Mover a set to push
+            position = search_position(a, array, max_chunk_size); //Mover a set to push
             //ft_printf("Posicion del numero: %i\n", position);
             set_to_push(a, b, position, med);
         }
         if (ft_lstsize(*a) < chunk_size)
             chunk_size = ft_lstsize(*a);
-        //ft_printf("Valor de i: %i\n", i);
+        //ft_printf("Paso\n");
         max_chunk_size = max_chunk_size + chunk_size;
         //ft_printf("Size del chunk  - 1max: %i\n", max_chunk_size);
     }
@@ -218,14 +218,14 @@ void    sort(t_list **a, t_list **b, int argc)
         sort_big(a, b, array, array_size);
     free(array);
 }
- - 1
+
 int main(int argc, char **argv)
 {
     t_list *a;
     t_list *b = NULL;
 
     parse(argv, argc);
-    a = lst_maker(argv, argc);     // - 1Liberar las dos variables de esta funcion
+    a = lst_maker(argv, argc);  // - 1Liberar las dos variables de esta funcion
     same_number_parse(&a);
     sort(&a, &b, argc);
     return (0);

@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:09:59 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/02 17:14:12 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:20:18 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ long	ft_atol(const char *str)
 		i++;
 	}
 	return (result * sign);
+}
+
+void	**free_split(char **s, int max_size)
+{
+	while (max_size >= 0)
+		free(s[max_size--]);
+	free(s);
+	return ;
 }
 
 void    print_array(int *array, int size)

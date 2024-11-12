@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:00:27 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/02 17:02:28 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:25:06 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_list  *lst_maker(char **argv, int argc)
             i++;
         }
         j++;
+        free_split(result);
     }
     return (lst);
 }

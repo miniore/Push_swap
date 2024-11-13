@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 11:27:19 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 13:35:18 by porellan         ###   ########.fr       */
+/*   Created: 2024/11/13 11:59:18 by porellan          #+#    #+#             */
+/*   Updated: 2024/11/13 13:49:20 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_list **lst1, t_list **lst2)
+void	sort(t_list **a, t_list **b, int argc)
 {
-	t_list	*tmp;
+	int	*array;
+	int	array_size;
 
-	if (!lst2)
-		return ;
-	tmp = *lst2;
-	*lst2 = (*lst2)->next;
-	tmp->next = *lst1;
-	*lst1 = tmp;
-}
-
-void	pa_push_a(t_list **a, t_list **b)
-{
-	push(a, b);
-	write(1, "pa\n", 3);
-}
-
-void	pb_push_b(t_list **b, t_list **a)
-{
-	push(b, a);
-	write(1, "pb\n", 3);
+	array_size = ft_lstsize(*a);
+	array = create_array(a, array_size);
+	sorted_array(array, 0, array_size - 1);
+	if (argc < 20)
+		sort_small(a, b, array);
+	else if (argc >= 20)
+		sort_big(a, b, array, array_size);
+	free(array);
 }

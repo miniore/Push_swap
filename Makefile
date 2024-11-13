@@ -7,7 +7,9 @@ SRC_FILES = main.c \
 			push_swap_utils.c \
 			stack_utils.c \
 			parse.c \
+			sort.c \
 			sort_small.c \
+			sort_big.c \
 			swap.c \
 			push.c \
 			rotate.c \

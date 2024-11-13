@@ -6,11 +6,27 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:09:59 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/12 15:20:18 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:32:54 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_split(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		free(s[i++]);
+	free(s);
+}
+
+int	clear_lst(t_list *lst)
+{
+	ft_lstclear(&lst, free);
+	return (0);
+}
 
 long	ft_atol(const char *str)
 {
@@ -37,53 +53,41 @@ long	ft_atol(const char *str)
 	return (result * sign);
 }
 
-void	**free_split(char **s, int max_size)
-{
-	while (max_size >= 0)
-		free(s[max_size--]);
-	free(s);
-	return ;
-}
+// void    print_array(int *array, int size)
+// {
+//     int i = 0;
+//     while (i < size)
+//     {
+//         ft_printf("'%i'\n", array[i]);
+//         i++;
+//     }
+// }
 
-void    print_array(int *array, int size)
-{
-    int i = 0;
-    while (i < size)
-    {
-        ft_printf("'%i'\n", array[i]);
-        i++;
-    }
-}
+// void printList(t_list *a, t_list *b) 
+// {
+//     // t_list *current = head;
+//     // int* data = (int*)(head);
+//     // int size = ft_lstsize(current);
+//     // //ft_printf("%i\n", size);
+//     // while (size--) {
+//     //     printf(" %d\n", *data);
+//     //     current = current->next;
+//     // }
+//     t_list *head_a = a;
+//     t_list *head_b = b;
+//     printf("==========STACK_A==========\n");
+//     while (head_a)
+//     {
+//         printf(" %d\n", *(int *)(head_a->content));
+//         head_a = head_a->next;
+//     }
+//     printf("============================\n");
 
-void printList(t_list *a, t_list *b) 
-{
-    // t_list *current = head;
-    // int* data = (int*)(head);
-    // int size = ft_lstsize(current);
-    // //ft_printf("%i\n", size);
-    // while (size--) {
-    //     printf(" %d\n", *data);
-    //     current = current->next;
-    // }
-    t_list *head_a = a;
-    t_list *head_b = b;
-
-
-    printf("==========STACK_A==========\n");
-    while (head_a)
-    {
-        printf(" %d\n", *(int *)(head_a->content));
-        head_a = head_a->next;
-    }
-    printf("============================\n");
-    
-        printf("==========STACK_B==========\n");
-    while (head_b)
-    {
-        printf(" %d\n", *(int *)(head_b->content));
-        head_b = head_b->next;
-    }
-    printf("============================\n");
-
-
-}
+//         printf("==========STACK_B==========\n");
+//     while (head_b)
+//     {
+//         printf(" %d\n", *(int *)(head_b->content));
+//         head_b = head_b->next;
+//     }
+//     printf("============================\n");
+// }

@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:40:22 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 13:46:43 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:14:47 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	stack_ordered(t_list **lst)
 {
-	t_list 	*temp;
-	t_list 	*comp;
+	t_list	*temp;
+	t_list	*comp;
 
 	temp = *lst;
 	while (temp)
@@ -63,8 +63,6 @@ static void	lst_sort(t_list **a, t_list **b, int *array, int i)
 	int		size;
 	int		counter;
 
-    //if (ft_lstsize(*a) == 3 || stack_ordered(a) == 0)
-    //    return ;
 	actual = *a;
 	counter = 0;
 	size = ft_lstsize(*a);
@@ -73,18 +71,17 @@ static void	lst_sort(t_list **a, t_list **b, int *array, int i)
 		counter++;
 		actual = actual->next;
 	}
-	if (counter < (size/2) && counter) //Si está en una posición por encima de la mitad (menos de la mitad)
+	if (counter < (size / 2) && counter)
 	{
 		while (counter--)
 			ra_rotate_a(a);
 	}
-	else // si j  es mayor que la mitad
+	else
 	{
 		while (counter < size--)
 			rra_reverse_rotate_a(a);
 	}
 	pb_push_b(b, a);
-	//lst_sort(a, b, array, i + 1);
 }
 
 void	sort_small(t_list **a, t_list **b, int *array)

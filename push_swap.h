@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:43:33 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 13:34:25 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:25:44 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	sort(t_list **a, t_list **b, int argc);
 t_list	*lst_maker(char **argv, int argc);
 int		*create_array(t_list **lst, int array_size);
 void	sorted_array(int *array, int first_elem, int last_elem);
-// int     stack_ordered(t_list **lst);
-// void    sort_3_num(t_list **a, int *sorted_array);
-// void    lst_sort(t_list **a, t_list **b, int *array, int i);
 void	sort_small(t_list **a, t_list **b, int *array);
 void	sort_big(t_list **a, t_list **b, int *array, int array_size);
 void	free_split(char **s);
@@ -48,9 +45,5 @@ void	reverse_rotate(t_list **lst);
 void	rra_reverse_rotate_a(t_list **a);
 void	rrb_reverse_rotate_b(t_list **b);
 void	rrr_reverse_rotate(t_list **a);
-void	print_array(int *array, int size);
-void	printList(t_list *a, t_list *b);
-//int     lst_compare(t_list **lst, long *sorted_array);
-//t_list  *stack_maker(char **argv);
 
 #endif

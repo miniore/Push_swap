@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:57:32 by miniore           #+#    #+#             */
-/*   Updated: 2024/11/13 13:31:39 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:01:51 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	same_number_parse(t_list **lst)
 			if (*(int *)current->content == *(int *)numb->content)
 			{
 				write(2, "Error 1\n", 6);
-				clear_lst(lst);
+				clear_lst(*lst);
 				exit(0);
 			}
 			current = current->next;

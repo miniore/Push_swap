@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:39:57 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 14:08:34 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:19:19 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*newNode;
+	t_list	*newnode;
 
-	newNode = ft_lstnew(new);
-	newNode -> next = *lst;
-	*lst = newNode;
+	newnode = ft_lstnew(new);
+	newnode -> next = *lst;
+	*lst = newnode;
 }

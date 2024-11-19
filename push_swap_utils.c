@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:09:59 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 13:32:54 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:21:47 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,42 +52,3 @@ long	ft_atol(const char *str)
 	}
 	return (result * sign);
 }
-
-// void    print_array(int *array, int size)
-// {
-//     int i = 0;
-//     while (i < size)
-//     {
-//         ft_printf("'%i'\n", array[i]);
-//         i++;
-//     }
-// }
-
-// void printList(t_list *a, t_list *b) 
-// {
-//     // t_list *current = head;
-//     // int* data = (int*)(head);
-//     // int size = ft_lstsize(current);
-//     // //ft_printf("%i\n", size);
-//     // while (size--) {
-//     //     printf(" %d\n", *data);
-//     //     current = current->next;
-//     // }
-//     t_list *head_a = a;
-//     t_list *head_b = b;
-//     printf("==========STACK_A==========\n");
-//     while (head_a)
-//     {
-//         printf(" %d\n", *(int *)(head_a->content));
-//         head_a = head_a->next;
-//     }
-//     printf("============================\n");
-
-//         printf("==========STACK_B==========\n");
-//     while (head_b)
-//     {
-//         printf(" %d\n", *(int *)(head_b->content));
-//         head_b = head_b->next;
-//     }
-//     printf("============================\n");
-// }

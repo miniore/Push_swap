@@ -6,53 +6,11 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:00:27 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/19 15:10:13 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:41:17 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// static void    stack_adder(char **result, t_list *lst)
-// {
-//     int     *number;
-//     //t_list  *temp;
-//     int     i;
-    
-//     i = 0;
-//     //ft_printf("%s\n", result[i]);
-//     while (result[i])
-//     {
-//         number = (int *)malloc(sizeof(int));
-//         if (!number)
-//             return;
-//         *number = ft_atoi(result[i]);
-//         //ft_printf("Number:%i",number[i]);
-//         //temp = ft_lstnew(number);
-//         //ft_printf("Temp:%d\n", *(int *)temp->content);
-//         ft_lstadd_back(&lst, ft_lstnew(number));
-//         printf("Temp:%d\n", *(int *)lst->content);
-//         i++;
-//     }
-// }
-
-// t_list    *stack_maker(char **argv)
-// {
-//     t_list  *lst;
-//     char    **result;
-//     int     i;
-    
-//     i = 1;
-//     lst = 0;
-//     while (argv[i])
-//     {
-//         result = ft_split(argv[i], 32);
-//         ft_printf("%s\n", result[i - 1]);
-//         stack_adder(result, lst);
-//         i++;
-//     }
-//     return (lst);
-// }
-
 
 static void	sort_nums_in_array(int *array, int i, int j)
 {

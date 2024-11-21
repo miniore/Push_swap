@@ -17,7 +17,7 @@ SRC_FILES = main.c \
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra
 
 all:$(NAME)
 	@echo "make    ✅"

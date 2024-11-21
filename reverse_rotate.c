@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:53:04 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 13:36:45 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:32:33 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void	rrb_reverse_rotate_b(t_list **b)
 	write(1, "rrb\n", 4);
 }
 
-void	rrr_reverse_rotate(t_list **a)
+void	rrr_reverse_rotate(t_list **a, t_list **b)
 {
 	reverse_rotate(a);
+	rrb_reverse_rotate_b(b);
 	write(1, "rra\n", 4);
 }

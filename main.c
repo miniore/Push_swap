@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:51:37 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/13 13:25:08 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:12:35 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	parse(argv, argc);
 	a = lst_maker(argv, argc);
 	same_number_parse(&a);
-	sort(&a, &b, argc);
+	sort(&a, &b);
 	clear_lst(a);
 	return (0);
 }

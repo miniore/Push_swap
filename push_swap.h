@@ -6,7 +6,7 @@
 /*   By: porellan <porellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:43:33 by porellan          #+#    #+#             */
-/*   Updated: 2024/11/20 12:35:21 by porellan         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:12:47 by porellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	arg_parse(int argc);
 void	symbols_parse(char **argv, int argc);
 void	num_limits_parse(char **argv, int argc);
 void	same_number_parse(t_list **lst);
-void	sort(t_list **a, t_list **b, int argc);
+void	sort(t_list **a, t_list **b);
 t_list	*lst_maker(char **argv, int argc);
 int		*create_array(t_list **lst, int array_size);
 void	sorted_array(int *array, int first_elem, int last_elem);
